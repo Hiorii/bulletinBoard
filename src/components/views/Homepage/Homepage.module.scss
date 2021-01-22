@@ -1,0 +1,36 @@
+@import '../../../styles/settings.scss';
+
+ .root {
+   @include flex(center, center);
+   flex-wrap: wrap;
+   .board {
+     flex-wrap: wrap;
+     margin-top: 6rem;
+     width: 90vw;
+     height: auto;
+     background: $milk-font;
+     position: relative;
+     .title {
+       width: 100%;
+       margin: 1rem;
+       h1 {
+
+         text-align: center;
+       }
+       img {
+         position: absolute;
+         top: 0;
+         left: 0;
+         height: 8rem;
+       }
+     }
+     .categories {
+       @include flex(center,center);
+       width: 8rem;
+       height: 8rem;
+       border-radius: 50%;
+       background: $main-background;
+       margin: 5rem 3rem;
+     }
+   }
+ }

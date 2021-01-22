@@ -1,0 +1,64 @@
+@import '../../../styles/settings.scss';
+
+ .root {
+   .advert {
+     @include flex(space-between,center);
+     height: 4rem;
+     background: $milk-font;
+     margin-bottom: 2rem;
+     overflow: hidden;
+     position: relative;
+     p {
+       text-align: right;
+       width: 100%;
+       font-size: 1.5rem;
+       color: $main-background;
+       position: absolute;
+       right: 100%;
+       line-height: 100%;
+       animation: moving 20s linear infinite;
+     }
+     @keyframes moving {
+       from {
+         transform: translateX(0);
+       }
+       to {
+         transform: translateX(152%);
+       }
+     }
+   }
+  .panel {
+    @include flex(space-between, center);
+    margin: 0 5rem;
+    .logo {
+      @include flex(center,center);
+      img {
+        width: 7rem;
+      }
+      p {
+        margin-left: 1.4rem;
+        font-size: 2.5rem;
+        color: $main-font;
+        span {
+          color: $milk-font;
+        }
+      }
+    }
+    .menu {
+      @include flex(center,center);
+      font-size: 1.5rem;
+      p {
+        cursor: pointer;
+        margin-right: 1.4rem;
+        border-bottom: 7px solid $main-font;
+        border-radius: 7px;
+        transition: $main-transition;
+
+        &:hover {
+          color: $milk-font;
+          border-bottom: 7px solid $milk-font;
+        }
+      }
+    }
+  }
+ }

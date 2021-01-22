@@ -1,0 +1,18 @@
+$base-size: 12px;
+
+//COLORS//
+$main-background: #00ABE1;
+$main-font: #161F6D;
+$milk-font: #e5e2e2;
+
+
+$font-main: 'Luckiest Guy', cursive;
+
+$main-transition: all .3s;
+
+//MIXINS//
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}

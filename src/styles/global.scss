@@ -1,0 +1,16 @@
+@import "settings.scss";
+@import url('http://fonts.googleapis.com/css?family=Alfa+Slab+One&subset=latin,latin-ext');
+
+*,*::before,*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Alfa Slab One', sans-serif;
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #161F6D;
+}

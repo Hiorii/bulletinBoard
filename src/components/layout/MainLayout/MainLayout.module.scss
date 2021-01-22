@@ -1,0 +1,10 @@
+@import '../../../styles/settings.scss';
+
+ .root {
+   height: 100vh;
+   background: $main-background;
+   h2 {
+     color: red;
+     font-family: $font-main;
+   }
+ }
