@@ -1,51 +1,67 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Homepage.module.scss';
+import PostList from '../PostList/PostListContainer';
 
-const Component = () => (
-  <div className={styles.root}>
-    <div className={styles.board}>
-      <div className={styles.title}>
-        <h1>Kategorie główne</h1>
-        <img src='/img/pin.png' alt=""/>
-      </div>
-      <div className={styles.categories}>
-        <div className={styles.category}> Wow</div>
+import VanillaTilt from 'vanilla-tilt';
+
+const Homepage = ({allCategories}) => {
+  const inputEl = useRef([]);
+
+  useEffect(() => {
+    VanillaTilt.init(inputEl.current, {
+      scale: 1.2,
+      speed: 1000,
+      max: 30,
+    });
+  }, []);
+
+  return (
+    <div className={styles.root}>
+      <div className={styles.boardsContainer}>
+        <div className={styles.boardContainer}>
+          <div className={styles.board}>
+            <div className={styles.title}>
+              <h1>Kategorie główne</h1>
+              <img src='/img/pin.png' alt="PinPicture"/>
+            </div>
+            <div className={styles.categoriesContainer}>
+              {allCategories.map((category,index)=> {
+                return (
+                  <div key={index} className={styles.categories}>
+                    <div
+                      key={index}
+                      className={styles.category}
+                      style={{backgroundImage: `url(${category.image})`}}
+                      ref={ref => inputEl.current.push(ref)}
+                    >
+                      <p>{category.name}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className={styles.board}>
+          <div className={styles.title}>
+            <h1>Lista ogłoszeń</h1>
+            <img src='/img/pin.png' alt=""/>
+          </div>
+          <div className={styles.posts}>
+            <PostList />
+          </div>
+        </div>
+        <div className={styles.circleOne}> </div>
+        <div className={styles.circleTwo}> </div>
       </div>
     </div>
-    <div className={styles.board}>
-      <div className={styles.title}>
-        <h1>Lista ogłoszeń</h1>
-        <img src='/img/pin.png' alt=""/>
-      </div>
-      <div className={styles.categories}>
-        <div className={styles.category}> Wow</div>
-      </div>
-    </div>
-  </div>
-);
-
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
+  );
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as Homepage,
-  // Container as Homepage,
-  Component as HomepageComponent,
+Homepage.propTypes = {
+  allCategories: PropTypes.array,
 };
+
+export default Homepage;

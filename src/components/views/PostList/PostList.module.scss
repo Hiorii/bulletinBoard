@@ -1,0 +1,34 @@
+@import "../../../styles/settings";
+
+.root {
+  background: white;
+  @include flex(center,center);
+  .postContainer {
+    @include flex(center, center);
+    flex-wrap: wrap;
+    width: 17rem;
+    .image {
+      margin-top: 1rem;
+      width: 90%;
+      img {
+        width: 100%;
+      }
+    }
+    .title {
+      width: 90%;
+      margin: 1.5rem 0;
+      font-size: 1.5rem;
+    }
+    .data {
+      width: 90%;
+      color: #b0afaf;
+      font-size: 0.9rem;
+      margin-bottom: .7rem;
+    }
+    .price {
+      width: 90%;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

@@ -3,18 +3,30 @@
  .root {
    @include flex(center, center);
    flex-wrap: wrap;
+   .boardsContainer {
+     width: 60rem;
+     position: relative;
+     .boardContainer {
+       @include flex(center, center);
+       flex-wrap: wrap;
+       width: 100%;
+
+     }
+   }
    .board {
+     @include flex(center,center);
      flex-wrap: wrap;
      margin-top: 6rem;
-     width: 90vw;
+     width: 100%;
      height: auto;
      background: $milk-font;
-     position: relative;
+     background: linear-gradient(to right bottom, rgba(255,255,255,0.7), rgba(255,255,2555,0.3));
+     border-radius: 2rem;
+     backdrop-filter: blur(2rem);
      .title {
        width: 100%;
        margin: 1rem;
        h1 {
-
          text-align: center;
        }
        img {
@@ -24,13 +36,59 @@
          height: 8rem;
        }
      }
-     .categories {
-       @include flex(center,center);
-       width: 8rem;
-       height: 8rem;
-       border-radius: 50%;
-       background: $main-background;
-       margin: 5rem 3rem;
+     .categoriesContainer {
+       @include flex(space-around,center);
+       flex-wrap: wrap;
+       width: 50rem;
+       margin: 0;
+       .categories {
+         @include flex(center, center);
+         width: 15rem;
+         flex-wrap: wrap;
+         position: relative;
+         margin: 1rem 0;
+         .category {
+           @include flex(center,flex-end);
+           width: 9rem;
+           height: 9rem;
+           border-radius: 15px;
+           background-size: 50%;
+           background-repeat: no-repeat;
+           background-position: center;
+           margin: 0 3rem;
+           box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+           border-top: 2px solid rgba(255,255,255,0.5);
+           border-left: 2px solid rgba(255,255,255,0.5);
+           backdrop-filter: blur(2rem);
+           p {
+             width: 100%;
+             text-align: center;
+           }
+         }
+       }
      }
+   }
+   .posts {
+     @include flex(space-between,center);
+     flex-wrap: wrap;
+     margin: 5rem 2rem;
+   }
+   .circleOne, .circleTwo, .circleThree, .circleFour {
+     position: absolute;
+     background: $milk-font;
+     background: linear-gradient(to right bottom, rgba(255,255,255,0.8), rgba(255,255,2555,0.3));
+     border-radius: 50%;
+     height: 20rem;
+     width: 20rem;
+     overflow: hidden;
+     z-index: -1;
+   }
+   .circleOne {
+     top: 0;
+     right: -10%;
+   }
+   .circleTwo {
+     top: 42%;
+     right: 80%;
    }
  }

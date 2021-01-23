@@ -15,7 +15,6 @@ const Component = () => (
     </div>
     <div className={styles.panel}>
       <div className={styles.logo}>
-        <img src='/img/logo.png' alt="logo"/>
         <p>Share <span>It</span></p>
       </div>
       <div className={styles.menu}>
