@@ -4,13 +4,12 @@
    @include flex(center, center);
    flex-wrap: wrap;
    .boardsContainer {
-     width: 60rem;
+     width: 60.45rem;
      position: relative;
      .boardContainer {
        @include flex(center, center);
        flex-wrap: wrap;
        width: 100%;
-
      }
    }
    .board {
@@ -39,7 +38,7 @@
      .categoriesContainer {
        @include flex(space-around,center);
        flex-wrap: wrap;
-       width: 50rem;
+       width: 65rem;
        margin: 0;
        .categories {
          @include flex(center, center);
@@ -47,6 +46,7 @@
          flex-wrap: wrap;
          position: relative;
          margin: 1rem 0;
+         cursor: pointer;
          .category {
            @include flex(center,flex-end);
            width: 9rem;
@@ -70,8 +70,28 @@
    }
    .posts {
      @include flex(space-between,center);
-     flex-wrap: wrap;
-     margin: 5rem 2rem;
+     margin: 3rem 3rem;
+     overflow: scroll;
+     overflow-y: hidden;
+     overflow-x: hidden;
+     .left, .right {
+       @include flex(center, center);
+       width: 4rem;
+       height: 4rem;
+       position: absolute;
+       background: $main-font;
+       font-size: 2rem;
+       z-index: 99;
+       color: $milk-font;
+       border-radius: 50%;
+       cursor: pointer;
+     }
+     .left {
+       left: -3%;
+     }
+     .right {
+       right: -3%;
+     }
    }
    .circleOne, .circleTwo, .circleThree, .circleFour {
      position: absolute;

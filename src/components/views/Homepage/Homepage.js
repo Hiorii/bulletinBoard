@@ -2,12 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Homepage.module.scss';
-import PostList from '../PostList/PostListContainer';
+import {BsChevronLeft} from 'react-icons/bs';
+import {BsChevronRight} from 'react-icons/bs';
+
+import PostShort from '../PostShort/PostShortContainer';
 
 import VanillaTilt from 'vanilla-tilt';
 
 const Homepage = ({allCategories}) => {
   const inputEl = useRef([]);
+  const navigation = useRef(null);
+
+  const arrowNavigation = (scrollOffset) => {
+    navigation.current.scrollLeft += scrollOffset;
+  };
 
   useEffect(() => {
     VanillaTilt.init(inputEl.current, {
@@ -49,8 +57,20 @@ const Homepage = ({allCategories}) => {
             <h1>Lista ogłoszeń</h1>
             <img src='/img/pin.png' alt=""/>
           </div>
-          <div className={styles.posts}>
-            <PostList />
+          <div className={styles.posts} ref={navigation}>
+            <div
+              className={styles.left}
+              onClick={()=>arrowNavigation(-288)}
+            >
+              <BsChevronLeft />
+            </div>
+            <PostShort />
+            <div
+              className={styles.right}
+              onClick={()=>arrowNavigation(288)}
+            >
+              <BsChevronRight />
+            </div>
           </div>
         </div>
         <div className={styles.circleOne}> </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Button from '../../common/Button/Button';
@@ -15,11 +16,13 @@ const Component = () => (
     </div>
     <div className={styles.panel}>
       <div className={styles.logo}>
-        <p>Share <span>It</span></p>
+        <Link to='/'>Share <span>It</span></Link>
       </div>
       <div className={styles.menu}>
         <p>Zaloguj</p>
-        <Button> Dodaj ogłoszenie </Button>
+        <Link to='/post/add'>
+          <Button> Dodaj ogłoszenie </Button>
+        </Link>
       </div>
     </div>
   </div>

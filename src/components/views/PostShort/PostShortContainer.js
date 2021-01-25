@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import PostList from './PostList';
+import PostShort from './PostShort';
 import {getAll} from '../../../redux/postsRedux';
 
 const mapStateToProps = state => ({
@@ -10,4 +10,4 @@ const mapStateToProps = state => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-export default connect(mapStateToProps)(PostList);
+export default connect(mapStateToProps)(PostShort);

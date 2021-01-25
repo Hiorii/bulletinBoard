@@ -1,14 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import styles from './PostList.module.scss';
+import styles from './PostShort.module.scss';
 
-const PostList = ({allPosts}) => {
+const PostShort = ({allPosts}) => {
   return (
     <>
       {allPosts.map((post,index) => {
         return (
-          <div key={index} className={styles.root}>
+          <Link
+            to={{
+              pathname: `/post/${post.title}`,
+              state: post,
+            }}
+            key={index}
+            className={styles.root}
+          >
             <div className={styles.postContainer}>
               <div className={styles.image}>
                 <img src={post.image} alt={post.title}/>
@@ -23,15 +31,15 @@ const PostList = ({allPosts}) => {
                 <p>{post.price} zł</p>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </>
   );
 };
 
-PostList.propTypes = {
+PostShort.propTypes = {
   allPosts: PropTypes.array,
 };
 
-export default PostList;
+export default PostShort;
