@@ -16,6 +16,7 @@
      @include flex(center,center);
      flex-wrap: wrap;
      margin-top: 6rem;
+     margin-bottom: 1rem;
      width: 100%;
      height: auto;
      background: $milk-font;
@@ -34,6 +35,9 @@
          left: 0;
          height: 8rem;
        }
+     }
+     .btnAll {
+       margin-bottom: 1rem;
      }
      .categoriesContainer {
        @include flex(space-around,center);

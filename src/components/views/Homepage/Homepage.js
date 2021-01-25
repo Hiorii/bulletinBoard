@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './Homepage.module.scss';
@@ -8,6 +9,7 @@ import {BsChevronRight} from 'react-icons/bs';
 import PostShort from '../PostShort/PostShortContainer';
 
 import VanillaTilt from 'vanilla-tilt';
+import Button from '../../common/Button/Button';
 
 const Homepage = ({allCategories}) => {
   const inputEl = useRef([]);
@@ -54,7 +56,7 @@ const Homepage = ({allCategories}) => {
         </div>
         <div className={styles.board}>
           <div className={styles.title}>
-            <h1>Lista ogłoszeń</h1>
+            <h1>Wyróżnione ogłoszenia</h1>
             <img src='/img/pin.png' alt=""/>
           </div>
           <div className={styles.posts} ref={navigation}>
@@ -72,6 +74,11 @@ const Homepage = ({allCategories}) => {
               <BsChevronRight />
             </div>
           </div>
+          <Link to='/post/list'>
+            <div className={styles.btnAll}>
+              <Button>Zobacz wszytskie</Button>
+            </div>
+          </Link>
         </div>
         <div className={styles.circleOne}> </div>
         <div className={styles.circleTwo}> </div>
