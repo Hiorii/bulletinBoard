@@ -49,6 +49,10 @@
     .menu {
       @include flex(center,center);
       font-size: 1.5rem;
+      a {
+        text-decoration: none;
+        color: $main-font;
+      }
       p {
         cursor: pointer;
         margin-right: 1.4rem;

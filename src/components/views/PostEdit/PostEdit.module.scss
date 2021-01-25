@@ -1,4 +1,139 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  @include flex(center, center);
+  flex-wrap: wrap;
+  width: 65rem;
+  margin: 4rem auto;
+  .title {
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0 3rem 0;
+    color: $main-font;
+    font-size: 2.7rem;
+  }
+  .container {
+    @include flex(center, center);
+    flex-wrap: wrap;
+    width: 100%;
+    background: $milk-font;
+    background: linear-gradient(to right bottom, rgba(255,255,255,0.7), rgba(255,255,2555,0.3));
+    border-radius: 2rem;
+    backdrop-filter: blur(2rem);
+    .formContainer {
+      @include flex(space-between, flex-start);
+      .data {
+        @include flex(center,center);
+        flex-wrap: wrap;
+        input, textarea {
+          width: 100%;
+          box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+          border-top: 2px solid rgba(255,255,255,0.5);
+          border-left: 2px solid rgba(255,255,255,0.5);
+          backdrop-filter: blur(2rem);
+        }
+        input {
+          height: 3rem;
+          margin-bottom: 1rem;
+        }
+        textarea  {
+          height: 10rem;
+        }
+        input[type=file] {
+          display: none;
+        }
+      }
+      .imageContainer {
+        @include flex(center,center);
+        width: 18rem;
+        height: 18rem;
+        box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+        border-top: 2px solid rgba(255,255,255,0.5);
+        border-left: 2px solid rgba(255,255,255,0.5);
+        backdrop-filter: blur(2rem);
+        margin-left: 2rem;
+        .imageInner {
+          width: 100%;
+          height: 100%;
+          .imageWrapper {
+            @include flex(center,center);
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+            .editBtn {
+              @include flex(center,center);
+              button {
+                border: none;
+                outline: none;
+                display: inline-block;
+                padding: .75rem 1.25rem;
+                border-radius: 10rem;
+                color: $milk-font;
+                transition: $main-transition;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                cursor: pointer;
+                &:after {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-color: $main-font;
+                  border-radius: 10rem;
+                  z-index: -2;
+                }
+                &:before {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  width: 0;
+                  height: 100%;
+                  background-color: $milk-font;
+                  transition: $main-transition;
+                  border-radius: 10rem;
+                  z-index: -1;
+                }
+                &:hover {
+                  color: $main-font;
+                  &:before {
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+          .addBtn {
+            background: transparent;
+            border: none;
+            .icon {
+              height: 4rem;
+              width: 4rem;
+              cursor: pointer;
+              color: $main-font;
+            }
+          }
+          .addPhotoTitle {
+            width: 100%;
+            margin-bottom: 2rem;
+            color: $main-font;
+            text-align: center;
+          }
+        }
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+        margin: 3rem;
+      }
+
+    }
+  }
+}

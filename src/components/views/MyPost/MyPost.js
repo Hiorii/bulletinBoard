@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import styles from './PostList.module.scss';
+import {Link, useHistory} from 'react-router-dom';
+import styles from './MyPost.module.scss';
 
-const PostList = ({allPosts}) => {
+const MyPost = ({allPosts}) => {
+  const history = useHistory();
+  const currentUser = history.location.state;
+  const userPost = allPosts.filter(post=> post.userId === currentUser[0].id);
+
   return (
     <div className={styles.root}>
-      <h1>Lista ogłoszeń</h1>
-      {allPosts.map((post,index) => {
+      <h1>Moje ogłoszenia</h1>
+      {userPost.map((post,index) => {
         return (
           <Link
             to={{
@@ -38,8 +42,8 @@ const PostList = ({allPosts}) => {
   );
 };
 
-PostList.propTypes = {
+MyPost.propTypes = {
   allPosts: PropTypes.array,
 };
 
-export default PostList;
+export default MyPost;

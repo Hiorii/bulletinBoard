@@ -85,7 +85,7 @@ export const initialState = {
         price: 132,
         phone: 724876987,
         location: 'Krakow',
-        userId: '4',
+        userId: '1',
 
       },
       {
@@ -114,7 +114,7 @@ export const initialState = {
         price: 28,
         phone: 521876987,
         location: 'Warsaw',
-        userId: '4',
+        userId: '3',
       },
       {
         id: '6',
@@ -144,15 +144,15 @@ export const initialState = {
       surname: 'random surname',
       email: 'random email',
       role: 'admin',
-      isLogged: true,
+      isLogged: false,
     },
     {
       id: '2',
       name: 'logged user1',
       surname: 'random surname',
       email: 'random email',
-      role: 'logged',
-      isLogged: true,
+      role: 'user',
+      isLogged: false,
     },
 
     {
@@ -160,7 +160,7 @@ export const initialState = {
       name: 'not logged user',
       surname: 'random surname',
       email: 'random email',
-      role: 'not logged',
+      role: 'user',
       isLogged: false,
     },
     {
@@ -168,8 +168,8 @@ export const initialState = {
       name: 'logged user2',
       surname: 'random surname',
       email: 'random email',
-      role: 'logged',
-      isLogged: true,
+      role: 'user',
+      isLogged: false,
     },
   ],
 };

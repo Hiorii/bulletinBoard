@@ -1,50 +1,55 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Button from '../../common/Button/Button';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Header.module.scss';
 
-const Component = () => (
-  <div className={styles.root}>
-    <div className={styles.advert}>
-      <p>Szukaj, dodawaj, korzystaj - zacznij już dziś</p>
-    </div>
-    <div className={styles.panel}>
-      <div className={styles.logo}>
-        <Link to='/'>Share <span>It</span></Link>
-      </div>
-      <div className={styles.menu}>
-        <p>Zaloguj</p>
-        <Link to='/post/add'>
-          <Button> Dodaj ogłoszenie </Button>
-        </Link>
-      </div>
-    </div>
-  </div>
-);
+const Header = ({allUsers}) => {
+  const [loggedUser, setLoggedUser] = useState([]);
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
+  useEffect(()=> {
+    const currentUser = allUsers.filter(user=> user.isLogged === true);
+    setLoggedUser(currentUser);
+  },[allUsers]);
+
+  return (
+    <div className={styles.root}>
+      <div className={styles.advert}>
+        <p>Szukaj, dodawaj, korzystaj - zacznij już dziś</p>
+      </div>
+      <div className={styles.panel}>
+        <div className={styles.logo}>
+          <Link to='/'>Share <span>It</span></Link>
+        </div>
+        <div className={styles.menu}>
+          {loggedUser.length === 0 &&
+            <a href="https://www.google.com/"><p>Zaloguj</p></a>
+          }
+          {loggedUser.length !== 0 &&
+          <>
+            <Link to={{
+              pathname: '/post/myPost',
+              state: loggedUser,
+            }}
+            >
+              <p>Moje</p>
+            </Link>
+            <a href="https://www.google.com/"><p>Wyloguj</p></a>
+          </>
+          }
+          <Link to='/post/add'>
+            <Button> Dodaj ogłoszenie </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as Header,
-  // Container as Header,
-  Component as HeaderComponent,
+Header.propTypes = {
+  allUsers: PropTypes.array,
 };
+
+export default Header;

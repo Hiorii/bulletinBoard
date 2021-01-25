@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NotFoundComponent } from './NotFound';
+import NotFoundComponent from './NotFound';
 
 describe('Component NotFound', () => {
   it('should render without crashing', () => {
