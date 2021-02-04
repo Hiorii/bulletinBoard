@@ -8,6 +8,7 @@ import styles from './Post.module.scss';
 const Post = () => {
   let history = useHistory();
   const currentPost = history.location.state;
+
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -36,7 +37,7 @@ const Post = () => {
           <div className={styles.info}>
             <div>
               <p>Data publikacji: </p>
-              <span>{currentPost.created}</span>
+              <span>{currentPost.created.slice(0,10)}</span>
             </div>
             <div>
               <p>Lokalizacja: </p>

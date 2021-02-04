@@ -14,7 +14,6 @@ import Button from '../../common/Button/Button';
 const Homepage = ({allCategories}) => {
   const inputEl = useRef([]);
   const navigation = useRef(null);
-
   const arrowNavigation = (scrollOffset) => {
     navigation.current.scrollLeft += scrollOffset;
   };
@@ -34,7 +33,7 @@ const Homepage = ({allCategories}) => {
           <div className={styles.board}>
             <div className={styles.title}>
               <h1>Kategorie główne</h1>
-              <img src='/img/pin.png' alt="PinPicture"/>
+              <img src="/img/pin.png" alt="PinPicture"/>
             </div>
             <div className={styles.categoriesContainer}>
               {allCategories.map((category,index)=> {

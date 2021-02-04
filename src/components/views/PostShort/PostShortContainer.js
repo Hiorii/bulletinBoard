@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import PostShort from './PostShort';
-import {getAll} from '../../../redux/postsRedux';
+import {getAll, getAllPublished, fetchPublished} from '../../../redux/postsRedux';
 
 const mapStateToProps = state => ({
   allPosts: getAll(state),
+  publishedPosts: getAllPublished(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
+});
 
-export default connect(mapStateToProps)(PostShort);
+export default connect(mapStateToProps, mapDispatchToProps)(PostShort);

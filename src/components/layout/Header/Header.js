@@ -1,18 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Cookies from 'universal-cookie';
 
 import Button from '../../common/Button/Button';
 
 import styles from './Header.module.scss';
 
-const Header = ({allUsers}) => {
-  const [loggedUser, setLoggedUser] = useState([]);
+const Header = ({loadUsers}) => {
+  const cookies = new Cookies();
+  const loggedUser = cookies.get('username');
 
-  useEffect(()=> {
-    const currentUser = allUsers.filter(user=> user.isLogged === true);
-    setLoggedUser(currentUser);
-  },[allUsers]);
+  useEffect(() => {
+    loadUsers();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={styles.root}>
@@ -24,10 +26,10 @@ const Header = ({allUsers}) => {
           <Link to='/'>Share <span>It</span></Link>
         </div>
         <div className={styles.menu}>
-          {loggedUser.length === 0 &&
-            <a href="https://www.google.com/"><p>Zaloguj</p></a>
+          {!loggedUser &&
+            <a href="http://localhost:8000/auth/google"><p>Zaloguj</p></a>
           }
-          {loggedUser.length !== 0 &&
+          {loggedUser &&
           <>
             <Link to={{
               pathname: '/post/myPost',
@@ -36,7 +38,7 @@ const Header = ({allUsers}) => {
             >
               <p>Moje</p>
             </Link>
-            <a href="https://www.google.com/"><p>Wyloguj</p></a>
+            <a href="http://localhost:8000/auth/logout"><p>Wyloguj</p></a>
           </>
           }
           <Link to='/post/add'>
@@ -49,7 +51,7 @@ const Header = ({allUsers}) => {
 };
 
 Header.propTypes = {
-  allUsers: PropTypes.array,
+  loadUsers: PropTypes.func,
 };
 
 export default Header;

@@ -1,4 +1,7 @@
-export const getAll = ({users}) => users;
+import Axios from 'axios';
+
+/* selectors */
+export const getAll = ({users}) => users.data;
 
 /* action name creator */
 const reducerName = 'users';
@@ -16,8 +19,26 @@ export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 
 /* thunk creators */
 
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchStarted());
+      let res = await Axios.get('http://localhost:8000/api/users');
+      if (res) dispatch(fetchSuccess(res)) ;
+    } catch (err) {
+      dispatch(fetchError(err.message || true));
+    }
+  };
+};
+
+/* initial state */
+const initialState = {
+  data: [],
+  requests: [],
+};
+
 /* reducer */
-export const reducer = (statePart = [], action = {}) => {
+export const reducer = (statePart = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_START: {
       return {
@@ -35,7 +56,7 @@ export const reducer = (statePart = [], action = {}) => {
           active: false,
           error: false,
         },
-        data: action.payload,
+        data: action.payload.data,
       };
     }
     case FETCH_ERROR: {

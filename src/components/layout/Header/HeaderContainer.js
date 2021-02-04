@@ -1,10 +1,14 @@
 import {connect} from 'react-redux';
 import Header from './Header';
 
-import {getAll} from '../../../redux/userRedux';
+import {fetchUsers, getAll} from '../../../redux/userRedux';
 
 const mapStateToProps = state => ({
-  allUsers: getAll(state),
+  users: getAll(state),
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  loadUsers: () => dispatch(fetchUsers()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

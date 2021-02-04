@@ -12,7 +12,7 @@ import Homepage  from './components/views/Homepage/HomepageContainer';
 import Post from './components/views/Post/PostContainer';
 import MyPost from './components/views/MyPost/MyPostContainer';
 import PostEdit from './components/views/PostEdit/PostEdit';
-import PostAdd from './components/views/PostAdd/PostAdd';
+import PostAdd from './components/views/PostAdd/PostAddContainer';
 import PostList from './components/views/PostList/PostListContainer';
 import NotFound from './components/views/NotFound/NotFound';
 

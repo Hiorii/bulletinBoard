@@ -1,17 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styles from './PostShort.module.scss';
 
-const PostShort = ({allPosts}) => {
+const PostShort = ({publishedPosts, fetchPublishedPosts}) => {
+  useEffect(()=> {
+    fetchPublishedPosts();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
   return (
     <>
-      {allPosts.map((post,index) => {
+      {publishedPosts.map((post,index) => {
         return (
           <Link
             to={{
-              pathname: `/post/${post.title}`,
+              pathname: `/post/${post._id}`,
               state: post,
             }}
             key={index}
@@ -25,7 +30,7 @@ const PostShort = ({allPosts}) => {
                 <p>{post.title}</p>
               </div>
               <div className={styles.data}>
-                <p>{post.location} - {post.created}</p>
+                <p>{post.location} - {post.created.slice(0, 10)}</p>
               </div>
               <div className={styles.price}>
                 <p>{post.price} zł</p>
@@ -39,7 +44,8 @@ const PostShort = ({allPosts}) => {
 };
 
 PostShort.propTypes = {
-  allPosts: PropTypes.array,
+  publishedPosts: PropTypes.array,
+  fetchPublishedPosts: PropTypes.func,
 };
 
 export default PostShort;

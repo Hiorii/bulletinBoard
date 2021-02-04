@@ -1,6 +1,7 @@
 .vscode
 dist
 .idea
+mongoData
 
 # Logs
 logs
