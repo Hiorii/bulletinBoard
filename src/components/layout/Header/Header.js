@@ -15,7 +15,7 @@ const Header = ({loadUsers}) => {
     loadUsers();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   return (
     <div className={styles.root}>
       <div className={styles.advert}>

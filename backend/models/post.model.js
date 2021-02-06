@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
   price: { type: Number },
   phone: { type: String },
   location: { type: String },
-  userId: { type: Array, ref: 'User' },
+  userId: { type: String, ref: 'User' },
 });
 
 module.exports = mongoose.model('Post', postSchema);
