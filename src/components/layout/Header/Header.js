@@ -15,7 +15,7 @@ const Header = ({loadUsers}) => {
     loadUsers();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   return (
     <div className={styles.root}>
       <div className={styles.advert}>
@@ -27,7 +27,7 @@ const Header = ({loadUsers}) => {
         </div>
         <div className={styles.menu}>
           {!loggedUser &&
-            <a href="http://localhost:8000/auth/google"><p>Zaloguj</p></a>
+          <Link to='/login'><p>Zaloguj</p></Link>
           }
           {loggedUser &&
           <>
@@ -42,7 +42,9 @@ const Header = ({loadUsers}) => {
           </>
           }
           <Link to='/post/add'>
-            <Button> Dodaj ogłoszenie </Button>
+            <Button>
+              Dodaj ogłoszenie
+            </Button>
           </Link>
         </div>
       </div>

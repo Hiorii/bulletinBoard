@@ -14,6 +14,7 @@ import MyPost from './components/views/MyPost/MyPostContainer';
 import PostEdit from './components/views/PostEdit/PostEdit';
 import PostAdd from './components/views/PostAdd/PostAddContainer';
 import PostList from './components/views/PostList/PostListContainer';
+import Login from './components/views/Login/Login';
 import NotFound from './components/views/NotFound/NotFound';
 
 import './styles/global.scss';
@@ -33,6 +34,7 @@ const App = () => (
           <MainLayout>
             <Switch>
               <Route exact path='/' component={Homepage} />
+              <Route exact path='/login' component={Login} />
               <Route exact path='/post/add' component={PostAdd} />
               <Route exact path='/post/list' component={PostList} />
               <Route exact path='/post/myPost' component={MyPost} />

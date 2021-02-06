@@ -21,7 +21,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
   const loggedUser = cookies.get('username');
 
   const pictureLoad = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
+    console.log(imageList[0]);
     setImages(imageList);
   };
   const submitPost = (e) => {
