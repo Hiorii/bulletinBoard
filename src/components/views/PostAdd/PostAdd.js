@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import ImageUploading from 'react-images-uploading';
 
 import Button from '../../common/Button/Button';
@@ -13,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 
 const PostAdd = ({addNewPost, allUsers}) => {
   const alertCont = useContext(AlertContext);
+  const history = useHistory();
   const [images, setImages] = useState([]);
   const [inputTitle, setTitle] = useState('');
   const [inputText, setText] = useState('');
@@ -40,20 +42,49 @@ const PostAdd = ({addNewPost, allUsers}) => {
     setDate(today);
   };
 
+  const dangerAlertShow = (text) => {
+    alertCont.dangerAlert(text);
+    setTimeout(()=> {
+      alertCont.closeAlert();
+    },3000);
+  };
+
   const submitPost = (e) => {
     e.preventDefault();
     const currentUser = allUsers.filter(user=> user.email === loggedUser.user);
-    setPost({
-      title: inputTitle,
-      text: inputText,
-      price: inputPrice,
-      created: date,
-      updated: date,
-      status: 'published',
-      image: '/img/website-sell.jpg',
-      userId: currentUser[0]._id,
-    });
-    alertCont.successAlert('Twoje ogłoszenie zostało dodane');
+
+    if(inputTitle.length === 0) {
+      dangerAlertShow('Podaj tytuł ogłoszenia');
+    } else if(inputPrice === 0) {
+      dangerAlertShow('Podaj cenę ogłoszenia');
+    } else if(inputText.length === 0) {
+      dangerAlertShow('Podaj treść wiadomości');
+    } else if(inputTitle.length < 5) {
+      dangerAlertShow('Za krótki tytuł ogloszenia');
+    } else if(inputTitle.length > 45) {
+      dangerAlertShow('Za długi tytuł ogloszenia');
+    } else if(inputPrice < 0) {
+      dangerAlertShow('Cena nie może być mniejsza od 0');
+    } else if(inputText.length < 10) {
+      dangerAlertShow('Za krótka treść ogloszenia');
+    } else if(inputText.length > 250) {
+      dangerAlertShow('Za długa treść ogloszenia');
+    } else {
+      setPost({
+        title: inputTitle,
+        text: inputText,
+        price: inputPrice,
+        created: date,
+        updated: date,
+        status: 'published',
+        image: '/img/website-sell.jpg',
+        userId: currentUser[0]._id,
+      });
+      alertCont.successAlert('Twoje ogłoszenie zostało dodane');
+      setTimeout(()=> {
+        history.push('/');
+      },2000);
+    }
   };
 
   useEffect(()=> {
@@ -77,9 +108,10 @@ const PostAdd = ({addNewPost, allUsers}) => {
                 onChange={e=>setTitle(e.target.value)}
               />
               <input
-                type="text"
+                type="number"
                 id="price"
                 placeholder="Cena"
+                min="1"
                 onChange={e=>setPrice(e.target.value)}
               />
               <textarea

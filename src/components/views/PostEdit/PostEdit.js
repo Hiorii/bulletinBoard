@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ImageUploading from 'react-images-uploading';
-
+import {AlertContext} from '../../../data/AlertData';
 import Button from '../../common/Button/Button';
 
 import styles from './PostEdit.module.scss';
@@ -10,6 +10,7 @@ import PostShort from '../PostShort/PostShort';
 
 const PostEdit = ({editPost}) => {
   const history = useHistory();
+  const alertCont = useContext(AlertContext);
   const currentPost = history.location.state;
   const currentUser = history.location.state.userId;
   const [inputTitle, setTitle] = useState(currentPost.title);
@@ -30,9 +31,33 @@ const PostEdit = ({editPost}) => {
     setDate(today);
   };
 
+  const dangerAlertShow = (text) => {
+    alertCont.dangerAlert(text);
+    setTimeout(()=> {
+      alertCont.closeAlert();
+    },3000);
+  };
+
   const editData = (e) => {
     e.preventDefault();
-    setPost({
+
+    if(inputTitle.length === 0) {
+      dangerAlertShow('Podaj tytuł ogłoszenia');
+    } else if(inputPrice === 0) {
+      dangerAlertShow('Podaj cenę ogłoszenia');
+    } else if(inputText.length === 0) {
+      dangerAlertShow('Podaj treść wiadomości');
+    } else if(inputTitle.length < 5) {
+      dangerAlertShow('Za krótki tytuł ogloszenia');
+    } else if(inputTitle.length > 45) {
+      dangerAlertShow('Za długi tytuł ogloszenia');
+    } else if(inputPrice < 0) {
+      dangerAlertShow('Cena nie może być mniejsza od 0');
+    } else if(inputText.length < 10) {
+      dangerAlertShow('Za krótka treść ogloszenia');
+    } else if(inputText.length > 250) {
+      dangerAlertShow('Za długa treść ogloszenia');
+    } else setPost({
       title: inputTitle,
       text: inputText,
       price: inputPrice,
@@ -42,7 +67,10 @@ const PostEdit = ({editPost}) => {
       image: '/img/website-sell.jpg',
       userId: currentUser._id,
     });
-    alert('Post dodany!');
+    alertCont.successAlert('Twoje ogłoszenie zostało dodane');
+    setTimeout(()=> {
+      history.push('/');
+    },2000);
   };
 
   const pictureLoad = (imageList, addUpdateIndex) => {
