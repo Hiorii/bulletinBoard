@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import ImageUploading from 'react-images-uploading';
 
 import Button from '../../common/Button/Button';
+import Alerts from '../../features/Alert/Alert';
 
 import styles from './PostAdd.module.scss';
 import {AiFillFileAdd} from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
+import {AlertContext} from '../../../data/AlertData';
+import jwt_decode from 'jwt-decode';
 
 const PostAdd = ({addNewPost, allUsers}) => {
+  const alertCont = useContext(AlertContext);
   const [images, setImages] = useState([]);
   const [inputTitle, setTitle] = useState('');
   const [inputText, setText] = useState('');
@@ -18,7 +22,8 @@ const PostAdd = ({addNewPost, allUsers}) => {
   const [date, setDate] = useState('');
   const maxNumber = 1;
   const cookies = new Cookies();
-  const loggedUser = cookies.get('username');
+  let token = cookies.get('username');
+  let loggedUser = token ? jwt_decode(token) : '';
 
   const pictureLoad = (imageList, addUpdateIndex) => {
     console.log(imageList[0]);
@@ -37,8 +42,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
 
   const submitPost = (e) => {
     e.preventDefault();
-    const currentUser = allUsers.filter(user=> user.email === loggedUser);
-
+    const currentUser = allUsers.filter(user=> user.email === loggedUser.user);
     setPost({
       title: inputTitle,
       text: inputText,
@@ -49,7 +53,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
       image: '/img/website-sell.jpg',
       userId: currentUser[0]._id,
     });
-    alert('Post dodany!');
+    alertCont.successAlert('Twoje ogłoszenie zostało dodane');
   };
 
   useEffect(()=> {
@@ -60,6 +64,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
 
   return (
     <div className={styles.root}>
+      <Alerts />
       <div className={styles.container}>
         <h2 className={styles.title}>Dodawanie ogłoszenia</h2>
         <div className={styles.formContainer}>

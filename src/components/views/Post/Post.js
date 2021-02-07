@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -7,17 +7,12 @@ import jwt_decode from 'jwt-decode';
 
 import styles from './Post.module.scss';
 
-const Post = ({fetchPost}) => {
+const Post = () => {
   let history = useHistory();
   const currentPost = history.location.state;
   const cookies = new Cookies();
   let token = cookies.get('username');
   let loggedUser = token ? jwt_decode(token) : '';
-
-  useEffect(()=> {
-    fetchPost(currentPost._id);
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
 
   return (
     <div className={styles.root}>
@@ -79,7 +74,6 @@ const Post = ({fetchPost}) => {
 
 Post.propTypes = {
   posts: PropTypes.array,
-  fetchPost: PropTypes.func,
 };
 
 export default Post;

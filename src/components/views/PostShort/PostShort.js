@@ -30,7 +30,7 @@ const PostShort = ({allPosts, fetchPublishedPosts}) => {
                 <p>{post.title}</p>
               </div>
               <div className={styles.data}>
-                <p>{post.location} - {post.created.slice(0, 10)}</p>
+                {/*<p>{post.location} - {post.created.slice(0, 10)}</p>*/}
               </div>
               <div className={styles.price}>
                 <p>{post.price} zł</p>

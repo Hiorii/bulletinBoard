@@ -44,11 +44,20 @@ const Header = ({loadUsers}) => {
             <a href={`${GOOGLE_URL}/logout`}><p>Wyloguj</p></a>
           </>
           }
-          <Link to='/post/add'>
+          {token &&
+            <Link to='/post/add'>
+              <Button>
+                Dodaj ogłoszenie
+              </Button>
+            </Link>
+          }
+          {!token &&
+          <Link to='/login'>
             <Button>
               Dodaj ogłoszenie
             </Button>
           </Link>
+          }
         </div>
       </div>
     </div>
