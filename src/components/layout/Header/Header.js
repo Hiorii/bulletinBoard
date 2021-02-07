@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
+import {GOOGLE_URL} from '../../../config';
+import jwt_decode from 'jwt-decode';
 
 import Button from '../../common/Button/Button';
 
@@ -9,7 +11,8 @@ import styles from './Header.module.scss';
 
 const Header = ({loadUsers}) => {
   const cookies = new Cookies();
-  const loggedUser = cookies.get('username');
+  let token = cookies.get('username');
+  let loggedUser = token ? jwt_decode(token) : '';
 
   useEffect(() => {
     loadUsers();
@@ -26,10 +29,10 @@ const Header = ({loadUsers}) => {
           <Link to='/'>Share <span>It</span></Link>
         </div>
         <div className={styles.menu}>
-          {!loggedUser &&
+          {!token &&
           <Link to='/login'><p>Zaloguj</p></Link>
           }
-          {loggedUser &&
+          {token &&
           <>
             <Link to={{
               pathname: '/post/myPost',
@@ -38,7 +41,7 @@ const Header = ({loadUsers}) => {
             >
               <p>Moje</p>
             </Link>
-            <a href="http://localhost:8000/auth/logout"><p>Wyloguj</p></a>
+            <a href={`${GOOGLE_URL}/logout`}><p>Wyloguj</p></a>
           </>
           }
           <Link to='/post/add'>

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import styles from './Login.module.scss';
+import {GOOGLE_URL} from '../../../config';
 
 function Copyright() {
   return (
@@ -114,12 +115,12 @@ const Login = () => {
         <fieldset className={styles.google}>
           <legend className={styles.or}>lub</legend>
           <div className={styles.googleContainer}>
-            <button>
-              <img src='/img/google.png' alt=""/>
-              <a href="http://localhost:8000/auth/google">
+            <a href={`${GOOGLE_URL}/google`}>
+              <button>
+                <img src='/img/google.png' alt=""/>
                 <p>Zaloguj za pomocą konta google</p>
-              </a>
-            </button>
+              </button>
+            </a>
           </div>
         </fieldset>
         <Box mt={8}>

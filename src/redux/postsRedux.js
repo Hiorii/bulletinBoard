@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {API_URL} from '../config';
+
 /* selectors */
 export const getAll = ({posts}) => posts.data;
 export const getAllCategories = ({categories}) => categories.data;
@@ -30,7 +32,7 @@ export const fetchPublished = () => {
       dispatch(fetchStarted());
     }
     axios
-      .get('http://localhost:8000/api/posts')
+      .get(`${API_URL}/posts`)
       .then(res => {
         dispatch(fetchSuccess(res.data));
       })
@@ -47,7 +49,7 @@ export const postById = (id) => {
       dispatch(fetchStarted());
     }
     axios
-      .get(`http://localhost:8000/api/posts/${id}`)
+      .get(`${API_URL}/posts/${id}`)
       .then(res => {
         dispatch(fetchSuccess(res.data));
       })
@@ -61,7 +63,7 @@ export const addPostRequest = (post) => {
   return async (dispatch) => {
     dispatch(fetchStarted());
     try {
-      let res = await axios.post('http://localhost:8000/api/posts', post);
+      let res = await axios.post(`${API_URL}/posts`, post);
       dispatch(addPost(res));
       dispatch(fetchSuccess());
     } catch (err) {
@@ -74,7 +76,7 @@ export const updatePostRequest = (id, post) => {
   return async (dispatch) => {
     dispatch(fetchStarted());
     try {
-      let res = await axios.put(`http://localhost:8000/api/posts/${id}`, post);
+      let res = await axios.put(`${API_URL}/posts/${id}`, post);
       dispatch(updatePost(res));
       dispatch(fetchSuccess());
     } catch (err) {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
+import jwt_decode from 'jwt-decode';
 
 import styles from './Post.module.scss';
 
@@ -10,7 +11,9 @@ const Post = ({fetchPost}) => {
   let history = useHistory();
   const currentPost = history.location.state;
   const cookies = new Cookies();
-  const loggedUser = cookies.get('username');
+  let token = cookies.get('username');
+  let loggedUser = token ? jwt_decode(token) : '';
+
   useEffect(()=> {
     fetchPost(currentPost._id);
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +27,7 @@ const Post = ({fetchPost}) => {
             <p>{currentPost.title}</p>
             <p>{currentPost.price} zł</p>
           </div>
-          {loggedUser === currentPost.userId.email &&
+          {loggedUser.user === currentPost.userId.email &&
           <div className={styles.edit}>
             <Link to={{
               pathname: `/post/${currentPost._id}/edit`,

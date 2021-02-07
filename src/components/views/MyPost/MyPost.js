@@ -6,7 +6,7 @@ import styles from './MyPost.module.scss';
 const MyPost = ({allPosts}) => {
   const history = useHistory();
   const currentUser = history.location.state;
-  const userPost = allPosts.filter(post=> post.userId.email === currentUser);
+  const userPost = allPosts.filter(post=> post.userId.email === currentUser.user);
 
   return (
     <div className={styles.root}>
