@@ -1,7 +1,7 @@
 @import "../../../styles/settings";
 
 .root {
-  box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 7px rgba(0,0,0,0.5);
   border-top: 2px solid rgba(255,255,255,0.5);
   border-left: 2px solid rgba(255,255,255,0.5);
   backdrop-filter: blur(2rem);
@@ -9,11 +9,12 @@
   text-decoration: none;
   color: $main-font;
   @include flex(center,center);
-  margin: 0 1rem 0 0;
+  margin: 0 1rem 1rem 0;
   .postContainer {
     @include flex(center, center);
     flex-wrap: wrap;
     width: 17rem;
+    height: 25rem;
     .image {
       margin-top: 1rem;
       width: 90%;

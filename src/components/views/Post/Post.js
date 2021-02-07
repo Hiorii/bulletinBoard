@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import jwt_decode from 'jwt-decode';
 
 import styles from './Post.module.scss';
+import {AiFillEdit} from 'react-icons/ai';
 
 const Post = () => {
   let history = useHistory();
@@ -29,6 +30,7 @@ const Post = () => {
               state: currentPost,
             }}
             >
+              <AiFillEdit />
               Edytuj ogłoszenie
             </Link>
           </div>
