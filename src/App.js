@@ -11,7 +11,7 @@ import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import Homepage  from './components/views/Homepage/HomepageContainer';
 import Post from './components/views/Post/PostContainer';
 import MyPost from './components/views/MyPost/MyPostContainer';
-import PostEdit from './components/views/PostEdit/PostEdit';
+import PostEdit from './components/views/PostEdit/PostEditContainer';
 import PostAdd from './components/views/PostAdd/PostAddContainer';
 import PostList from './components/views/PostList/PostListContainer';
 import Login from './components/views/Login/Login';

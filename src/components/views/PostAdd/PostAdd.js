@@ -15,8 +15,8 @@ const PostAdd = ({addNewPost, allUsers}) => {
   const [inputPrice, setPrice] = useState(0);
   //const [inputImage, setImage] = useState([]);
   const [post, setPost] = useState({});
+  const [date, setDate] = useState('');
   const maxNumber = 1;
-  const date = new Date();
   const cookies = new Cookies();
   const loggedUser = cookies.get('username');
 
@@ -24,17 +24,29 @@ const PostAdd = ({addNewPost, allUsers}) => {
     console.log(imageList[0]);
     setImages(imageList);
   };
+
+  const currentDate = () => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    setDate(today);
+  };
+
   const submitPost = (e) => {
     e.preventDefault();
     const currentUser = allUsers.filter(user=> user.email === loggedUser);
-    console.log(currentUser[0]._id);
+
     setPost({
       title: inputTitle,
       text: inputText,
       price: inputPrice,
-      created: date.getFullYear() + date.getMonth() + date.getDate(),
-      updated: date.getFullYear() + date.getMonth() + date.getDate(),
+      created: date,
+      updated: date,
       status: 'published',
+      image: '/img/website-sell.jpg',
       userId: currentUser[0]._id,
     });
     alert('Post dodany!');
@@ -42,6 +54,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
 
   useEffect(()=> {
     addNewPost(post);
+    currentDate();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   },[post]);
 
@@ -104,7 +117,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
                       <h2 className={styles.addPhotoTitle}>Dodaj zdjęcie</h2>
                       <button
                         className={styles.addBtn}
-                        onClick={onImageUpload}
+                        //onClick={onImageUpload}
                         {...dragProps}
                       >
                         <AiFillFileAdd className={styles.icon}/>

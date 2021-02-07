@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './PostShort.module.scss';
 
-const PostShort = ({publishedPosts, fetchPublishedPosts}) => {
+const PostShort = ({allPosts, fetchPublishedPosts}) => {
   useEffect(()=> {
     fetchPublishedPosts();
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -12,7 +12,7 @@ const PostShort = ({publishedPosts, fetchPublishedPosts}) => {
 
   return (
     <>
-      {publishedPosts.map((post,index) => {
+      {allPosts.map((post,index) => {
         return (
           <Link
             to={{
@@ -44,7 +44,7 @@ const PostShort = ({publishedPosts, fetchPublishedPosts}) => {
 };
 
 PostShort.propTypes = {
-  publishedPosts: PropTypes.array,
+  allPosts: PropTypes.array,
   fetchPublishedPosts: PropTypes.func,
 };
 

@@ -31,7 +31,7 @@ router.get('/posts/:id', async (req, res) => {
 });
 
 router.post('/posts', async (req,res)=> {
-  const {title, price, text, created, updated, status, userId} = req.body;
+  const {title, price, text, created, updated, status, image, userId} = req.body;
   try {
     let newPost = new Post({
       title: title,
@@ -40,6 +40,7 @@ router.post('/posts', async (req,res)=> {
       created: created,
       updated: updated,
       status: status,
+      image: image,
       userId: userId,
     })
     //await newPost.save().populate('userId');
@@ -50,5 +51,27 @@ router.post('/posts', async (req,res)=> {
     res.status(500).json(err);
   }
 });
+
+router.put('/posts/:id', async(req,res)=> {
+  const {title, price, text, created, updated, status, image, userId} = req.body;
+  try {
+    let post = await (Post.findById(req.params.id));
+    if(!post) res.status(404).json({message: 'Not found...'});
+    else {
+      post.title = title;
+      post.price = price;
+      post.text = text;
+      post.created = created;
+      post.updated = updated;
+      post.status = status;
+      post.image = image;
+      post.userId = userId;
+      await post.save();
+      res.json(post);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
 module.exports = router;

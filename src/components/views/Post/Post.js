@@ -1,34 +1,40 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Cookies from 'universal-cookie';
 
 import styles from './Post.module.scss';
 
-const Post = () => {
+const Post = ({fetchPost}) => {
   let history = useHistory();
   const currentPost = history.location.state;
+  const cookies = new Cookies();
+  const loggedUser = cookies.get('username');
+  useEffect(()=> {
+    fetchPost(currentPost._id);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        {/*{users.isLogged && (users.name === 'admin' || users.id === currentPost.userId) &&*/}
-
-        {/*}*/}
         <div className={styles.title}>
           <div className={styles.titleText}>
             <p>{currentPost.title}</p>
             <p>{currentPost.price} zł</p>
           </div>
+          {loggedUser === currentPost.userId.email &&
           <div className={styles.edit}>
             <Link to={{
-              pathname: `/post/${currentPost.id}/edit`,
+              pathname: `/post/${currentPost._id}/edit`,
               state: currentPost,
             }}
             >
               Edytuj ogłoszenie
             </Link>
           </div>
+          }
         </div>
         <div className={styles.data}>
           <div className={styles.imgContainer}>
@@ -69,7 +75,8 @@ const Post = () => {
 };
 
 Post.propTypes = {
-  allCategories: PropTypes.array,
+  posts: PropTypes.array,
+  fetchPost: PropTypes.func,
 };
 
 export default Post;

@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 import PostShort from './PostShort';
-import {getAll, getAllPublished, fetchPublished} from '../../../redux/postsRedux';
+import {getAll, fetchPublished} from '../../../redux/postsRedux';
 
 const mapStateToProps = state => ({
   allPosts: getAll(state),
-  publishedPosts: getAllPublished(state),
 });
 
 const mapDispatchToProps = dispatch => ({
