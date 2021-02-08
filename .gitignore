@@ -1,7 +1,8 @@
 .vscode
 dist
 .idea
-mongoData
+backend/configData
+configData
 
 # Logs
 logs

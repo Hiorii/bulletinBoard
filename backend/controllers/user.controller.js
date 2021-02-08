@@ -1,5 +1,5 @@
 const User = require('../models/user.model');
-const ApiURL = require('../config');
+const ApiURL = require('../settings/config');
 const jwt = require("jsonwebtoken");
 
 exports.getAll = async(req,res)=> {
