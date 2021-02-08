@@ -1,7 +1,9 @@
 import Axios from 'axios';
+import axios from 'axios';
+import {API_URL} from '../config';
 
 /* selectors */
-export const getAll = ({users}) => users.data;
+export const getAllUsers = ({users}) => users.data;
 
 /* action name creator */
 const reducerName = 'users';
@@ -25,6 +27,17 @@ export const fetchUsers = () => {
       dispatch(fetchStarted());
       let res = await Axios.get('http://localhost:8000/api/users');
       if (res) dispatch(fetchSuccess(res)) ;
+    } catch (err) {
+      dispatch(fetchError(err.message || true));
+    }
+  };
+};
+
+export const updateUserRequest = (id, user) => {
+  return async (dispatch) => {
+    dispatch(fetchStarted());
+    try {
+      await axios.put(`${API_URL}/user/${id}`, user);
     } catch (err) {
       dispatch(fetchError(err.message || true));
     }

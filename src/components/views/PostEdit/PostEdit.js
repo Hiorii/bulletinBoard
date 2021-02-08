@@ -6,7 +6,6 @@ import {AlertContext} from '../../../data/AlertData';
 import Button from '../../common/Button/Button';
 
 import styles from './PostEdit.module.scss';
-import PostShort from '../PostShort/PostShort';
 
 const PostEdit = ({editPost}) => {
   const history = useHistory();
@@ -40,7 +39,6 @@ const PostEdit = ({editPost}) => {
 
   const editData = (e) => {
     e.preventDefault();
-    alertCont.successAlert('wow');
     if(inputTitle.length === 0) {
       dangerAlertShow('Podaj tytuł ogłoszenia');
     } else if(inputPrice === 0) {

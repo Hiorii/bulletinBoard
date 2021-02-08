@@ -5,6 +5,9 @@ import Cookies from 'universal-cookie';
 import {GOOGLE_URL} from '../../../config';
 import jwt_decode from 'jwt-decode';
 
+import {BsCardList} from 'react-icons/bs';
+import {AiOutlineLogin, AiOutlineLogout} from 'react-icons/ai';
+import {FaUserEdit} from 'react-icons/fa';
 import Button from '../../common/Button/Button';
 
 import styles from './Header.module.scss';
@@ -30,18 +33,37 @@ const Header = ({loadUsers}) => {
         </div>
         <div className={styles.menu}>
           {!token &&
-          <Link to='/login'><p>Zaloguj</p></Link>
+          <Link to='/login' className={styles.menuLink}>
+            <AiOutlineLogin />
+            <p className={styles.menuText}>Zaloguj</p>
+          </Link>
           }
           {token &&
           <>
-            <Link to={{
-              pathname: '/post/myPost',
-              state: loggedUser,
-            }}
+            <Link
+              to={{
+                pathname: '/post/myPost',
+                state: loggedUser,
+              }}
+              className={styles.menuLink}
             >
-              <p>Moje</p>
+              <BsCardList />
+              <p className={styles.menuText}>Moje</p>
             </Link>
-            <a href={`${GOOGLE_URL}/logout`}><p>Wyloguj</p></a>
+            <Link
+              to={{
+                pathname: '/user',
+                state: loggedUser,
+              }}
+              className={styles.menuLink}
+            >
+              <FaUserEdit />
+              <p className={styles.menuText}>User</p>
+            </Link>
+            <a href={`${GOOGLE_URL}/logout`} className={styles.menuLink}>
+              <AiOutlineLogout />
+              <p className={styles.menuText}>Wyloguj</p>
+            </a>
           </>
           }
           {token &&

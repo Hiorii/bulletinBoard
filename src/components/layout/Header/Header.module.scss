@@ -49,14 +49,31 @@
     .menu {
       @include flex(center,center);
       font-size: 1.5rem;
+      position: relative;
+      .menuLink {
+        margin: 0 1rem;
+        .menuText {
+          display: none;
+          position: absolute;
+        }
+        svg {
+          font-size: 3rem;
+        }
+        &:hover {
+          .menuText {
+            display: block;
+          }
+        }
+      }
       a {
         text-decoration: none;
         color: $main-font;
       }
       p {
+        padding: .4rem;
         cursor: pointer;
         margin-right: 1.4rem;
-        border-bottom: 7px solid $main-font;
+        border: 3px solid $milk-font;
         border-radius: 7px;
         transition: $main-transition;
 
@@ -68,3 +85,31 @@
     }
   }
  }
+
+//@keyframes sizeDown {
+//  0% {transform: scale(1)}
+//  10% {transform: scale(0.9)}
+//  20% {transform: scale(0.8)}
+//  30% {transform: scale(0.7)}
+//  40% {transform: scale(0.6)}
+//  50% {transform: scale(0.5)}
+//  60% {transform: scale(0.4)}
+//  70% {transform: scale(0.3)}
+//  80% {transform: scale(0.2)}
+//  90% {transform: scale(0.1)}
+//  100% {transform: scale(0); display: none}
+//}
+//
+//@keyframes sizeUp {
+//  0% {transform: scale(0); display: block}
+//  10% {transform: scale(0.1)}
+//  20% {transform: scale(0.2)}
+//  30% {transform: scale(0.3)}
+//  40% {transform: scale(0.4)}
+//  50% {transform: scale(0.5)}
+//  60% {transform: scale(0.6)}
+//  70% {transform: scale(0.7)}
+//  80% {transform: scale(0.8)}
+//  90% {transform: scale(0.9)}
+//  100% {transform: scale(1); display: block}
+//}

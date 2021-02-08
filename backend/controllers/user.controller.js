@@ -62,5 +62,23 @@ exports.logOut = async(req,res)=> {
         return res.redirect(ApiURL);
       }
     }
-  } catch (err) {res.status(500).json(err);}
+  } catch (err) {
+    res.status(500).json(err);
+  };
+};
+
+exports.update = async(req,res) => {
+  const {phone, location} = req.body;
+  try {
+    const user = await(User.findById(req.params.id));
+    if(!user) res.status(404).json({message: 'Not found...'})
+    else {
+      user.phone = phone;
+      user.location = location;
+      await user.save();
+      res.json(user);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  };
 };

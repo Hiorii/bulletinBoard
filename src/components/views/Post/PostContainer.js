@@ -1,11 +1,12 @@
 import {connect} from 'react-redux';
-import {getAll} from '../../../redux/postsRedux';
-import {postById} from '../../../redux/postsRedux';
+import {getAll, postById} from '../../../redux/postsRedux';
+import {getAllUsers} from '../../../redux/userRedux';
 
 import Post from './Post';
 
 const mapStateToProps = state => ({
   posts: getAll(state),
+  allUsers: getAllUsers(state),
 });
 
 const mapDispatchToProps = dispatch => ({
