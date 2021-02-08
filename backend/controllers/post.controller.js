@@ -29,18 +29,26 @@ exports.getById = async(req, res) => {
 exports.addNew = async(req,res)=> {
   const {title, price, text, created, updated, status, image, userId} = req.body;
   try {
-    let newPost = new Post({
-      title: title,
-      price: price,
-      text: text,
-      created: created,
-      updated: updated,
-      status: status,
-      image: image,
-      userId: userId,
-    })
-    await newPost.save();
-    res.json(newPost);
+    if (title && price && text) {
+      if(title.length > 5 && title.length < 45 && price > 0 && text.length > 10 && text.length < 250) {
+        let newPost = new Post({
+          title: title,
+          price: price,
+          text: text,
+          created: created,
+          updated: updated,
+          status: status,
+          image: image,
+          userId: userId,
+        })
+        await newPost.save();
+        res.json(newPost);
+      } else {
+        throw new Error('Wrong data!');
+      }
+    } else {
+      throw new Error('Wrong input!');
+    }
   } catch (err) {
     res.status(500).json(err);
   }

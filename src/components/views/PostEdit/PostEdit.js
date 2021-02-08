@@ -27,7 +27,7 @@ const PostEdit = ({editPost}) => {
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = dd + '/' + mm + '/' + yyyy;
     setDate(today);
   };
 
@@ -40,7 +40,7 @@ const PostEdit = ({editPost}) => {
 
   const editData = (e) => {
     e.preventDefault();
-
+    alertCont.successAlert('wow');
     if(inputTitle.length === 0) {
       dangerAlertShow('Podaj tytuł ogłoszenia');
     } else if(inputPrice === 0) {
@@ -57,20 +57,23 @@ const PostEdit = ({editPost}) => {
       dangerAlertShow('Za krótka treść ogloszenia');
     } else if(inputText.length > 250) {
       dangerAlertShow('Za długa treść ogloszenia');
-    } else setPost({
-      title: inputTitle,
-      text: inputText,
-      price: inputPrice,
-      created: date,
-      updated: date,
-      status: 'published',
-      image: '/img/website-sell.jpg',
-      userId: currentUser._id,
-    });
-    alertCont.successAlert('Twoje ogłoszenie zostało dodane');
-    setTimeout(()=> {
-      history.push('/');
-    },2000);
+    } else {
+      setPost({
+        title: inputTitle,
+        text: inputText,
+        price: inputPrice,
+        created: date,
+        updated: date,
+        status: 'published',
+        image: '/img/website-sell.jpg',
+        userId: currentUser._id,
+      });
+      alertCont.successAlert('Twoje ogłoszenie zostało dodane');
+      setTimeout(()=> {
+        history.push('/');
+        alertCont.closeAlert();
+      },2000);
+    }
   };
 
   const pictureLoad = (imageList, addUpdateIndex) => {

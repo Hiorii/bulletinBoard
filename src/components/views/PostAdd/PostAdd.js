@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom';
 import ImageUploading from 'react-images-uploading';
 
 import Button from '../../common/Button/Button';
-import Alerts from '../../features/Alert/Alert';
 
 import styles from './PostAdd.module.scss';
 import {AiFillFileAdd} from 'react-icons/ai';
@@ -38,7 +37,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+    today = dd + '/' + mm + '/' + yyyy;
     setDate(today);
   };
 
@@ -83,6 +82,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
       alertCont.successAlert('Twoje ogłoszenie zostało dodane');
       setTimeout(()=> {
         history.push('/');
+        alertCont.closeAlert();
       },2000);
     }
   };
@@ -95,7 +95,6 @@ const PostAdd = ({addNewPost, allUsers}) => {
 
   return (
     <div className={styles.root}>
-      <Alerts />
       <div className={styles.container}>
         <h2 className={styles.title}>Dodawanie ogłoszenia</h2>
         <div className={styles.formContainer}>
