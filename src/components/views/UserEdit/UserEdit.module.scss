@@ -41,6 +41,29 @@
           margin-bottom: 2rem;
           width: 100%;
         }
+        .btn {
+          width: 100%;
+          text-align: center;
+          margin: 3rem;
+          input {
+            border: none;
+            padding: .75rem 1.25rem;
+            border-radius: 10rem;
+            color: $milk-font;
+            font-size: 1.3rem;
+            font-weight: 800;
+            transition: $main-transition;
+            cursor: pointer;
+            width: 20rem;
+            height: 3rem;
+            background: $main-font;
+            margin: 0;
+            &:hover {
+              color: $main-font;
+              background: $milk-font;
+            }
+          }
+        }
         input {
           width: 15.5rem;
           box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
@@ -59,6 +82,16 @@
           margin-bottom: 1rem;
           span {
             font-weight: 800;
+          }
+        }
+        .formInner {
+          position: relative;
+          svg {
+            position: absolute;
+            top: 0;
+            right: -10%;
+            color: red;
+            font-size: 1.9rem;
           }
         }
       }

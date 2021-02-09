@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 const Alerts = () => {
   const classes = useStyles();
   const alertCont = useContext(AlertContext);
-  console.log(alertCont.alert.isVisible);
   return (
     <>
       {alertCont.alert.isVisible &&

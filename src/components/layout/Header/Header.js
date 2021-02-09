@@ -12,10 +12,11 @@ import Button from '../../common/Button/Button';
 
 import styles from './Header.module.scss';
 
-const Header = ({loadUsers}) => {
+const Header = ({loadUsers, allUsers}) => {
   const cookies = new Cookies();
   let token = cookies.get('username');
   let loggedUser = token ? jwt_decode(token) : '';
+  const currentUser = allUsers.filter(user => user.email === loggedUser.user);
 
   useEffect(() => {
     loadUsers();
@@ -66,12 +67,29 @@ const Header = ({loadUsers}) => {
             </a>
           </>
           }
-          {token &&
+          {token && currentUser.every(user => user.location.length > 0 && user.phone.length > 0)
+            ?
             <Link to='/post/add'>
               <Button>
                 Dodaj ogłoszenie
               </Button>
             </Link>
+            :
+            currentUser.map((user,index) => {
+              return (
+                <Link
+                  key={index}
+                  to={{
+                    pathname: `/user/${user._id}`,
+                    state: user,
+                  }}
+                >
+                  <Button>
+                    Dodaj ogłoszenie
+                  </Button>
+                </Link>
+              );
+            })
           }
           {!token &&
           <Link to='/login'>
@@ -88,6 +106,7 @@ const Header = ({loadUsers}) => {
 
 Header.propTypes = {
   loadUsers: PropTypes.func,
+  allUsers: PropTypes.array,
 };
 
 export default Header;

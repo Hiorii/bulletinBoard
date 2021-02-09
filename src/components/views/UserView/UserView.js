@@ -45,7 +45,7 @@ const UserView = ({allUsers}) => {
                 }}
                 >
                   <AiFillEdit />
-                  Edytuj ogłoszenie
+                  Edytuj dane
                 </Link>
               </div>
             </div>

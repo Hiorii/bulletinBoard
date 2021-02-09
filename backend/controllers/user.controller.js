@@ -35,6 +35,8 @@ exports.logIn = async(req,res)=> {
             email: username,
             role: 'user',
             isLogged: true,
+            location: '',
+            phone: '',
           })
           await newUser.save();
           res.cookie('username', token, { maxAge: 7200000, httpOnly: false });

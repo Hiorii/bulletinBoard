@@ -1,9 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import ImageUploading from 'react-images-uploading';
-
-import Button from '../../common/Button/Button';
-
 import styles from './PostAdd.module.scss';
 import {AiFillFileAdd} from 'react-icons/ai';
 import PropTypes from 'prop-types';
@@ -82,6 +79,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
       alertCont.successAlert('Twoje ogłoszenie zostało dodane');
       setTimeout(()=> {
         history.push('/');
+        history.go(0);
         alertCont.closeAlert();
       },2000);
     }
@@ -110,6 +108,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
                 type="number"
                 id="price"
                 placeholder="Cena"
+                step="0.01"
                 min="1"
                 onChange={e=>setPrice(e.target.value)}
               />
@@ -125,9 +124,7 @@ const PostAdd = ({addNewPost, allUsers}) => {
               {/*  onChange={e=>setImage(e)}*/}
               {/*/>*/}
               <div className={styles.btn}>
-                <Button className={styles.mainBtn}>
-                  <input type="submit" value='Dodaj ogłoszenie'/>
-                </Button>
+                <input type="submit" value='Dodaj ogłoszenie'/>
               </div>
             </form>
           </div>

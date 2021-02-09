@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
   phone: {type: String},
   location: {type: String},
   isLogged: {type: Boolean, required: true},
-  posts: {type: Array},
 });
 
 module.exports = mongoose.model('User', userSchema);

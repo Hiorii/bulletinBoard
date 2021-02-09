@@ -4,7 +4,7 @@ import Header from './Header';
 import {fetchUsers, getAllUsers} from '../../../redux/userRedux';
 
 const mapStateToProps = state => ({
-  users: getAllUsers(state),
+  allUsers: getAllUsers(state),
 });
 
 const mapDispatchToProps = dispatch => ({

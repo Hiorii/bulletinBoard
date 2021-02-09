@@ -132,24 +132,24 @@
            width: 100%;
            text-align: center;
            margin: 3rem;
-           .mainBtn {
-             border: 5px solid red;
-           }
            input {
-             margin: 0;
-             padding: 0;
-             //background: transparent;
              border: none;
-             width: 100%;
-             height: 100%;
-             //color: $milk-font;
-             //font-size: 1.3rem;
-             //visibility: hidden;
+             padding: .75rem 1.25rem;
              border-radius: 10rem;
-             //opacity: 0;
+             color: $milk-font;
+             font-size: 1.3rem;
+             font-weight: 800;
+             transition: $main-transition;
+             cursor: pointer;
+             width: 20rem;
+             height: 3rem;
+             background: $main-font;
+             &:hover {
+               color: $main-font;
+               background: $milk-font;
+             }
            }
          }
-
     }
   }
 }

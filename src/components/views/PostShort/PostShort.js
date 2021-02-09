@@ -1,23 +1,15 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Cookies from 'universal-cookie';
-import jwt_decode from 'jwt-decode';
-
 
 import styles from './PostShort.module.scss';
 
-const PostShort = ({allPosts, fetchPublishedPosts, allUsers}) => {
-  const cookies = new Cookies();
-  let token = cookies.get('username');
-  let loggedUser = token ? jwt_decode(token) : '';
-  const currentUser = allUsers.filter(user => user.email === loggedUser.user);
+const PostShort = ({allPosts, fetchPublishedPosts}) => {
 
   useEffect(()=> {
     fetchPublishedPosts();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
-
   return (
     <>
       {allPosts.map((post,index) => {
@@ -38,11 +30,7 @@ const PostShort = ({allPosts, fetchPublishedPosts, allUsers}) => {
                 <p>{post.title}</p>
               </div>
               <div className={styles.data}>
-                {currentUser.map((user,index)=> {
-                  return (
-                    <p key={index}>{user.location} - {post.updated.slice(0, 10)}</p>
-                  );
-                })}
+                <p>{post.userId.location} - {post.updated.slice(0, 10)}</p>
               </div>
               <div className={styles.price}>
                 <p>{post.price} zł</p>
@@ -58,7 +46,6 @@ const PostShort = ({allPosts, fetchPublishedPosts, allUsers}) => {
 PostShort.propTypes = {
   allPosts: PropTypes.array,
   fetchPublishedPosts: PropTypes.func,
-  allUsers: PropTypes.array,
 };
 
 export default PostShort;

@@ -1,29 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './UserEdit.module.scss';
-import Button from '../../common/Button/Button';
+import {AlertContext} from '../../../data/AlertData';
+import {BsFillExclamationCircleFill} from 'react-icons/bs';
 
 const UserEdit = ({updateUser}) => {
   const history = useHistory();
+  const alertCont = useContext(AlertContext);
   const currentUser = history.location.state;
   const [inputPhone, setInputPhone] = useState(currentUser.phone);
   const [inputLocation, setInputLocation] = useState(currentUser.location);
-  const [user, setUser] = useState({});
 
   const updateData = (e) => {
     e.preventDefault();
-    setUser({
+    updateUser(currentUser._id, {
       phone: inputPhone,
       location: inputLocation,
     });
-    alert('done');
+    alertCont.successAlert('Twoje dane zostały zaktualizowane');
+    setTimeout(()=> {
+      history.push('/');
+      history.go(0);
+      alertCont.closeAlert();
+    },2000);
   };
 
   useEffect(()=> {
-    updateUser(currentUser._id, user);
+    if(inputPhone.length === 0 || inputLocation.length === 0) {
+      alertCont.warningAlert('W celu odblokowania możliwości dodawania ogłoszeń, uzupełnij brakujące dane!');
+    } else {
+      alertCont.closeAlert();
+    }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[user]);
+  },[inputPhone, inputLocation]);
+
+  useEffect(()=> {
+    return () => {
+      alertCont.closeAlert();
+    };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
     <div className={styles.root}>
@@ -43,7 +60,7 @@ const UserEdit = ({updateUser}) => {
                 <span>{currentUser.role}</span>
               </div>
               <form onSubmit={e => updateData(e)}>
-                <div>
+                <div className={styles.formInner}>
                   <p>Telefon kontaktowy: </p>
                   <input
                     type="text"
@@ -52,8 +69,11 @@ const UserEdit = ({updateUser}) => {
                     placeholder="Numer telefonu"
                     onChange={e=>setInputPhone(e.target.value)}
                   />
+                  {inputPhone.length === 0 &&
+                    <BsFillExclamationCircleFill />
+                  }
                 </div>
-                <div>
+                <div className={styles.formInner}>
                   <p>Miejsce zamieszkania: </p>
                   <input
                     type="text"
@@ -62,11 +82,12 @@ const UserEdit = ({updateUser}) => {
                     placeholder="Miasto zamieszkania"
                     onChange={e=>setInputLocation(e.target.value)}
                   />
+                  {inputLocation.length === 0 &&
+                  <BsFillExclamationCircleFill />
+                  }
                 </div>
                 <div className={styles.btn}>
-                  <Button className={styles.mainBtn}>
-                    <input type="submit" value='Zapisz'/>
-                  </Button>
+                  <input type="submit" value='Zapisz'/>
                 </div>
               </form>
             </div>
