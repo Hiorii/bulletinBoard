@@ -3,6 +3,7 @@ dist
 .idea
 backend/configData
 configData
+build
 
 # Logs
 logs
