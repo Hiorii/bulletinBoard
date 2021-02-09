@@ -25,6 +25,28 @@
       .data {
         @include flex(center,center);
         flex-wrap: wrap;
+        .btn {
+          width: 100%;
+          text-align: center;
+          margin: 3rem;
+          input {
+            border: none;
+            padding: .75rem 1.25rem;
+            border-radius: 10rem;
+            color: $milk-font;
+            font-size: 1.3rem;
+            font-weight: 800;
+            transition: $main-transition;
+            cursor: pointer;
+            width: 20rem;
+            height: 3rem;
+            background: $main-font;
+            &:hover {
+              color: $main-font;
+              background: $milk-font;
+            }
+          }
+        }
         input, textarea {
           width: 100%;
           box-shadow: 20px 20px 50px rgba(0,0,0,0.5);

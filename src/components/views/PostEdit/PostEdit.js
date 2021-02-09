@@ -3,8 +3,6 @@ import {useHistory} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ImageUploading from 'react-images-uploading';
 import {AlertContext} from '../../../data/AlertData';
-import Button from '../../common/Button/Button';
-
 import styles from './PostEdit.module.scss';
 
 const PostEdit = ({editPost}) => {
@@ -118,9 +116,7 @@ const PostEdit = ({editPost}) => {
                 //value={images}
               />
               <div className={styles.btn}>
-                <Button className={styles.mainBtn}>
-                  <input type="submit" value='Edytuj ogłoszenie'/>
-                </Button>
+                <input type="submit" value='Edytuj ogłoszenie'/>
               </div>
             </form>
           </div>
